@@ -6,13 +6,17 @@ function __caret_color
 	end
 end
 
+function __return_code
+  echo "unimpted"
+end
+
 function fish_prompt
-	echo (set_color -o cyan)(whoami)(set_color normal)(set_color yellow)@(set_color -o blue)(hostname| cut -d . -f 1)(set_color normal):(pwd)
+	echo (set_color -o cyan)(whoami)(set_color normal)(set_color yellow)@(set_color -o blue)(hostname| cut -d . -f 1)(set_color normal):(set_color -o green)(__zsh_percent_tilde)(set_color normal)
 	echo -n (set_color (__caret_color))(__zsh_percent_hash)' '(set_color normal)
 end
 
 function fish_right_prompt -d "Write out the right prompt"
-	date "+%m/%d/%y"
+	echo -ns (__return_code)" "(date "+%D")" - "(date "+%T")
 end
 
 ### Polyfills
@@ -22,7 +26,7 @@ end
 
 # It's like prompt_pwd, but not exactly.
 function __zsh_percent_tilde
-  echo -n "unimplemented"
+  pwd
 end
 
 # $ for luser, # for superuser
