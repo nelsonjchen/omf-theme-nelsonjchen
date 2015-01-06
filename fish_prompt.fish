@@ -8,8 +8,8 @@ end
 
 
 function fish_prompt
-	echo -s (set_color -o cyan)(whoami)(set_color normal)@(hostname| cut -d . -f 1)
-	echo -s (set_color (__caret_color))'# '(set_color normal)
+	echo (set_color -o cyan)(whoami)(set_color normal)(set_color yellow)@(set_color -o blue)(hostname| cut -d . -f 1)(set_color normal):
+	echo -n (set_color (__caret_color))'# '(set_color normal)
 end
 
 function fish_right_prompt -d "Write out the right prompt"
