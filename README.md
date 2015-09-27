@@ -5,7 +5,7 @@
 </div>
 <br>
 
-> nelsonjchen theme for [Oh My Fish][omf-link]. Based on re5et of Oh-My-Zsh.
+> nelsonjchen theme for [Oh My Fish][omf-link]. Based on re5et in Oh-My-Zsh.
 
 ## Install
 
@@ -13,11 +13,21 @@
 $ omf u nelsonjchen
 ```
 
-## Features
+## Features and Differences
 
-* Civilian Time
 * Pretty colors
-* Red root user prompt
+* Two line prompt
+* Git Prompt using off-the-shelf fish functions
+  * Note that the symbology, colors, and features are more than the `zsh` version and they don't match up 1-to-1. For example, checking out a tag will show the tag name in `fish` but the re5et version in `zsh` will simply show the commit ID. This was one such freebie amongst many I just left in while porting since the `fish` script was giving it to me for free anyway. It is still pretty close though.
+* Red user prompt if `root`
+* 12 hour clock
+  * re5et: 24 hour clock
+* MM DD YY date format
+  * re5et: YY MM DD date format
+  
+## Omissions from the re5et version
+
+* Trimming down the working directory display only works on `~`. The original re5et prompt would also trim based on the current environment variables set. For example, if you had the environment variable `FOO` set to `/usr/local` and you did `cd /usr/local`, you would see `$FOO/` in the prompt as the current working directory. I'm not sure how I would get this working. `fish` does appear to have a condensation function but it goes beyond simple environment variable replacement and I can't figure out how to turn it off.
 
 ## Screenshot
 
