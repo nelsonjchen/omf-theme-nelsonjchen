@@ -9,8 +9,6 @@
 
 ## Install
 
-*NOT AVAILABLE YET*
-
 ```fish
 $ omf u nelsonjchen
 ```
