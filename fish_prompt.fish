@@ -1,47 +1,34 @@
-function __caret_color
-	if [ $USER = "root" ]
-	  echo -n "red"
-	else
-	  echo -n "magenta"
-	end
-end
-
-function __return_code
-  echo "unimpted"
-end
-
 function fish_prompt
-	echo (set_color -o cyan)(whoami)(set_color normal)(set_color yellow)@(set_color -o blue)(hostname| cut -d . -f 1)(set_color normal):(set_color -o green)(__zsh_percent_tilde)(set_color normal)
-	echo -n (set_color (__caret_color))(__zsh_percent_hash)' '(set_color normal)
-end
+	set user (set_color --bold cyan)(whoami)(set_color normal)
 
-function fish_right_prompt -d "Write out the right prompt"
-	echo -ns (__return_code)" "(date "+%D")" - "(date "+%T")
-end
+	set machine (set_color --bold blue)(hostname| cut -d . -f 1)(set_color normal)
 
-### Polyfills
+	set -l realhome ~
+	set directory (set_color --bold green)(echo $PWD | sed -e "s|^$realhome|~|")(set_color normal)
 
-## ZSH polyfills
-# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+	set -g __fish_git_prompt_show_informative_status 'yes'
+	set -g __fish_git_prompt_showcolorhints 'yes'
+	set color_bold_red (set_color --bold red)
+	set color_bold_yellow (set_color --bold yellow)
+	set color_bold_cyan (set_color --bold cyan)
+	set color_reset (set_color normal)
+	set -g __fish_git_prompt_char_dirtystate "$color_bold_red±$color_reset"
+	set -g __fish_git_prompt_char_cleanstate "$color_bold_red♥$color_reset"
+	set -g __fish_git_prompt_char_stagedstate "$color_bold_yellow●$color_reset"
+	set -g __fish_git_prompt_char_stagedstate "$color_bold_cyan…$color_reset"
+	set -g __fish_git_prompt_char_stateseparator ' '
+	# I have *no* idea why this works. Maybe set_color just ignores the second bold?
+	set -g __fish_git_prompt_color_branch "--bold" "--bold" "yellow"
+	set color_bold_magenta (set_color --bold magenta)
+	set git (__fish_git_prompt "$color_bold_magenta^$color_reset%s")
 
-# It's like prompt_pwd, but not exactly.
-function __zsh_percent_tilde
-  pwd
-end
+	echo -s $user (set_color yellow)'@' $machine ':' $directory $git
 
-# $ for luser, # for superuser
-function __zsh_percent_hash
 	if [ $USER = "root" ]
-	  echo -n "#"
+		set caret (set_color red ) "#"
 	else
-	  echo -n "\$"
+		set caret (set_color magenta) "\$"
 	end
+
+	echo -s $caret ' '(set_color normal)
 end
-
-## Oh-my-zsh polyfills
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/git.zsh
-
-function __omz_git_prompt_info
-  echo -n "unimplemented"
-end
-
