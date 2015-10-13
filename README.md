@@ -24,7 +24,9 @@ $ omf u nelsonjchen
   * re5et: 24 hour clock
 * MM DD YY date format
   * re5et: YY MM DD date format
-  
+* Title Setting to the `prompt_pwd` function in fish for screen, tmux, and non-terminal multiplexer.
+  * This is derived from [@chgu82837's theme](https://github.com/chgu82837/theme-PastFish/blob/39af8e2885e308501bb0afa9dedab193a8722cfe/fish_prompt.fish#L82-L90)
+
 ## Omissions from the re5et version
 
 * Trimming down the working directory display only works on `~`. The original re5et prompt would also trim based on the current environment variables set. For example, if you had the environment variable `FOO` set to `/usr/local` and you did `cd /usr/local`, you would see `$FOO/` in the prompt as the current working directory. I'm not sure how I would get this working. `fish` does appear to have a condensation function but it goes beyond simple environment variable replacement and I can't figure out how to turn it off.
