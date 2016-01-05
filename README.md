@@ -34,7 +34,8 @@ $ omf u nelsonjchen
 ## Screenshot
 
 <p align="center">
-<img src="nelsonjchen.png">
+<img
+src="https://cloud.githubusercontent.com/assets/5363/12106487/fe8b3c30-b314-11e5-9cbe-8b0e57dde741.png">
 </p>
 
 # License
